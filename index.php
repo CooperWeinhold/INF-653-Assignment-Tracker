@@ -67,3 +67,32 @@ switch ($action) {
         $assignments = get_assignments_by_course($course_id);
         include('view/assignment_list.php');
 }
+
+if (isset($_POST['action'])) {
+    switch ($_POST['action']) {
+        case 'update_assignment':
+            // Get values from the form
+            $assignment_id = $_POST['assignment_id'];
+            $description = $_POST['description'];
+            $course_id = $_POST['course_id'];
+
+            // Call the update function
+            update_assignment($assignment_id, $description, $course_id);
+
+            // Redirect to the assignment list
+            header("Location: view/assignment_list.php");
+            exit();
+
+        case 'update_course':
+            // Get values from the form
+            $course_id = $_POST['course_id'];
+            $course_name = $_POST['course_name'];
+
+            // Call the update function
+            update_course($course_id, $course_name);
+
+            // Redirect to the course list
+            header("Location: view/course_list.php");
+            exit();
+    }
+}

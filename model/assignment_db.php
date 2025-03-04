@@ -43,3 +43,14 @@ function add_assignment($course_id, $description)
     $statement->execute();
     $statement->closeCursor();
 }
+
+function update_assignment($assignment_id, $description, $course_id) {
+    global $db;
+    $query = "UPDATE assignments SET description = :description, courseID = :course_id WHERE id = :assignment_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':description', $description);
+    $statement->bindValue(':course_id', $course_id);
+    $statement->bindValue(':assignment_id', $assignment_id);
+    $statement->execute();
+    $statement->closeCursor();
+}

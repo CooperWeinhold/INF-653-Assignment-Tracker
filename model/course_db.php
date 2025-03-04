@@ -51,3 +51,13 @@ function add_course($course_name)
     $statement->execute();
     $statement->closeCursor();
 }
+
+function update_course($course_id, $course_name) {
+    global $db;
+    $query = "UPDATE courses SET courseName = :course_name WHERE id = :course_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':course_name', $course_name);
+    $statement->bindValue(':course_id', $course_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
