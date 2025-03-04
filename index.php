@@ -12,6 +12,14 @@ $course_id = filter_input(INPUT_POST, 'course_id', FILTER_VALIDATE_INT) ?: filte
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW) ?: filter_input(INPUT_GET, 'action', FILTER_UNSAFE_RAW) ?: 'list_assignments';
 
 switch ($action) {
+    case "update_assignment":
+        update_assignment($_POST['assignment_id'], $_POST['description'], $_POST['course_id']);
+        header("Location: view/assignment_list.php");
+        exit();
+    case "update_course":
+        update_course($_POST['course_id'], $_POST['course_name']);
+        header("Location: view/course_list.php");
+        exit();
     case "list_courses":
         $courses = get_courses();
         include('view/course_list.php');
